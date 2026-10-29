@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "mysql2": "^3.24.6"
+  },
+  "name": "neural_phish-hunter",
+  "version": "1.0.0",
+  "description": "An AI-driven, privacy-first web application that analyzes URL lexical structures to detect zero-day phishing threats, secured via a zero-trust Tailscale mesh.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shadow-labs-764/Neural_Phish-Hunter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/shadow-labs-764/Neural_Phish-Hunter/issues"
+  },
+  "homepage": "https://github.com/shadow-labs-764/Neural_Phish-Hunter#readme"
+}
