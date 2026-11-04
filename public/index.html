@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Phish-Hunter | Secure URL Scanner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- CSS routing -->
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/base.css">
+</head>
+<body>
+    <!-- Phase 1: Environmental Refraction (Background Orbs) -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <main class="scanner-container">
+        <!-- Brand Header -->
+        <header class="app-header">
+            <div class="shield-icon" >
+                <!-- Minimalist Outline Shield SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+            </div>
+            <h1>Neural Phish-Hunter</h1>
+            <p>Frictionless URL Threat Analysis</p>
+        </header>
+
+        <!-- Primary Interception Point -->
+        <form id="scan-form">
+            <div class="input-group">
+    <input 
+        type="text" 
+        id="target-url" 
+        placeholder="https://enter-target-url.com..." 
+        autocomplete="on" 
+        spellcheck="true"
+        autofocus
+    >
+    <button type="button" id="clear-btn" class="clear-btn hidden" aria-label="Clear URL" title="Clear input">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+    </button>
+    <button type="submit" id="scan-btn">SCAN</button>
+</div>
+        </form>
+
+        <!-- Post-Scan Autopsy Render (Hidden by default) -->
+        <section id="autopsy-overlay" class="hidden">
+            <div class="autopsy-header">
+                <h2>THREAT AUTOPSY</h2>
+            </div>
+            <div class="autopsy-body">
+                <div class="data-row">
+                    <span class="label">STATUS:</span>
+                    <span id="threat-status" class="value">AWAITING TELEMETRY</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">CONFIDENCE:</span>
+                    <span id="confidence-score" class="value">0%</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div id="confidence-fill" class="progress-bar-fill"></div>
+                </div>
+                <div class="data-row tokens-row">
+                    <span class="label">LEXICAL TOKENS (ANOMALIES DETECTED):</span>
+                    <div id="lexical-tokens" class="tokens-container">
+                        
+                    </div>
+                    <!-- NEW: Phase 2 Action Node -->
+                    <div class="autopsy-actions">
+                        <button id="btn-defang" class="action-btn">DEFANG & COPY</button>
+                        <button id="btn-export" class="action-btn">EXPORT DOSSIER</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- NEW: Local Session History -->
+        <section id="session-history" class="history-container">
+            <h3>RECENT SCANS</h3>
+            <ul id="history-list">
+                <!-- JS will inject local history here -->
+            </ul>
+        </section>
+    </main>
+    <!-- Phase 5: The Corporate Alibi -->
+    <footer class="corporate-footer">
+        <span class="tls-badge">🔒 Secured via TLS 1.3</span>
+        <span>Enterprise Threat Intelligence</span>
+    </footer>
+
+    <!-- The settings icon -->
+    <div id="trigger-zone" class="settings-gear" title="Toggle Theme" tabindex="0">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+    </div>
+    
+    <!-- The settings Menu -->
+    <div id="settings-menu" class="settings-modal hidden">
+        <div class="modal-header">App Preferences</div>
+        <div class="modal-row">
+            <span>Dark Mode</span>
+            <label class="switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="modal-row" style="color: var(--text-muted); font-size: 0.8rem;">
+            <span>Version 1.0.4 (Stable)</span>
+        </div>
+    </div>
+    
+    <!-- Core Logic -->
+    <script src="js/app.js"></script>
+</body>
+</html>

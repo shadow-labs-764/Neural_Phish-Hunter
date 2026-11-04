@@ -56,7 +56,7 @@ def main():
         confidence = float(probabilities[0][prediction]) * 100
         
         # 4. Map output (1 = Phishing, 0 = Safe)
-        threat_status = "MALICIOUS" if prediction == 1 else "BENIGN"
+        threat_status = "MALICIOUS" if prediction == 1 else "SAFE"
         
         # 5. Extract tokens explicitly for the audit log / database payload
         tokens = make_tokens(target_url)

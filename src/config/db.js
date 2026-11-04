@@ -19,7 +19,6 @@ const pool = mysql.createPool({
 
 /**
  * Log scan payload to the remote MySQL database
- * @param {Object} payload - The JSON payload from scanner.py
  */
 async function logScanResult(payload) {
     const query = `
@@ -27,7 +26,6 @@ async function logScanResult(payload) {
         VALUES (?, ?, ?, ?, NOW())
     `;
 
-    // Convert the tokens array to a JSON string for database storage
     const tokensJson = JSON.stringify(payload.lexical_tokens);
 
     try {
@@ -45,7 +43,31 @@ async function logScanResult(payload) {
     }
 }
 
+/**
+ * Extract recent scan logs for the Ghost DOM dashboard
+ */
+async function getTelemetryLogs() {
+    const query = `
+        SELECT 
+            DATE_FORMAT(scanned_at, '%H:%i:%s UTC') as timestamp,
+            target_url,
+            threat_status as status,
+            confidence
+        FROM scan_logs
+        ORDER BY scanned_at DESC
+        LIMIT 50
+    `;
+    try {
+        const [rows] = await pool.query(query);
+        return rows;
+    } catch (error) {
+        console.error(`[!] Telemetry Extraction Failure: ${error.message}`);
+        throw error;
+    }
+}
+
 module.exports = {
     pool,
-    logScanResult
+    logScanResult,
+    getTelemetryLogs
 };
