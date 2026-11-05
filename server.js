@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const { spawn } = require('child_process');
 const path = require('path');
-const { logScanResult, getTelemetryLogs } = require('./src/config/db');
+const { logScanResult, getTelemetryLogs, verifyOperative } = require('./src/config/db');
 
 const app = express();
 app.use(express.json());
@@ -122,11 +122,14 @@ app.post('/api/v1/auth/ghost', (req, res) => {
     res.status(200).json({ status: "UNLOCKED", payload: { css: loginCSS, html: loginHTML } });
 });
 
-// --- PHASE 4B: OPERATIVE AUTHENTICATION (Database Prep) ---
-app.post('/api/v1/auth/operative', (req, res) => {
+// --- PHASE 4B: OPERATIVE AUTHENTICATION ---
+app.post('/api/v1/auth/operative', async (req, res) => {
     const { opId, opPass } = req.body;
 
-    if (opId !== 'admin' || opPass !== 'hunter2026') {
+    // Route login through the Zero Trust database
+    const isAuthorized = await verifyOperative(opId, opPass);
+
+    if (!isAuthorized) {
         return res.status(401).json({ error: "INVALID CREDENTIALS" });
     }
 
