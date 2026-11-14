@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // OPSEC Settings
-const CLASSIFIED_PASSPHRASE = process.env.OPERATIVE_PASSPHRASE || "ECHO-ACTUAL-99";
+const CLASSIFIED_PASSPHRASE = process.env.OPERATIVE_PASSPHRASE;
 const SESSION_TOKEN = "CLANDESTINE-SESSION-TOKEN";
 
 // --- PHASE 3: API BRIDGE ENDPOINT ---
@@ -19,7 +19,7 @@ app.post('/api/v1/scan', (req, res) => {
     const { target_url } = req.body;
 
     if (!target_url) {
-        return res.status(400).json({ error: 'Missing target_url in request payload' });
+        return res.status(400).json({ error: 'Missing url in request payload' });
     }
 
     const scriptPath = path.join(__dirname, './ai_engine/scanner.py');

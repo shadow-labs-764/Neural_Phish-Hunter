@@ -1,5 +1,5 @@
 const mysql = require('mysql2/promise');
-
+const bcrypt = require('bcrypt');
 /**
  * Initialize Connection Pool
  * Target: Azure Instance 2 via Tailscale Mesh IP
@@ -22,7 +22,7 @@ const pool = mysql.createPool({
  */
 async function logScanResult(payload) {
     const query = `
-        INSERT INTO scan_logs (target_url, threat_status, confidence, lexical_tokens, scanned_at)
+        INSERT INTO scan_logs (url, threat_status, confidence, lexical_tokens, scanned_at)
         VALUES (?, ?, ?, ?, NOW())
     `;
 
@@ -50,7 +50,7 @@ async function getTelemetryLogs() {
     const query = `
         SELECT 
             DATE_FORMAT(scanned_at, '%H:%i:%s UTC') as timestamp,
-            target_url,
+            url,
             threat_status as status,
             confidence
         FROM scan_logs
@@ -66,8 +66,30 @@ async function getTelemetryLogs() {
     }
 }
 
+async function verifyOperative(username, password) {
+    try {
+        const [rows] = await pool.execute('SELECT * FROM operatives WHERE username = ?', [username]);
+        if (rows.length === 0) return false;
+
+        const operative = rows[0];
+        const isValid = await bcrypt.compare(password, operative.password_hash);
+
+        if (isValid) {
+            // Log the successful handshake timestamp
+            await pool.execute('UPDATE operatives SET last_login = NOW() WHERE id = ?', [operative.id]);
+            return true;
+        }
+        return false;
+    } catch (error) {
+        console.error(`[!] Operative Verification Failure: ${error.message}`);
+        return false;
+    }
+}
+
 module.exports = {
     pool,
     logScanResult,
-    getTelemetryLogs
+    getTelemetryLogs,
+    verifyOperative // Export the newly created function
 };
+
