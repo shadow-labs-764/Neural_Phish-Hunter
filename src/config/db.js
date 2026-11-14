@@ -22,7 +22,7 @@ const pool = mysql.createPool({
  */
 async function logScanResult(payload) {
     const query = `
-        INSERT INTO scan_logs (url, threat_status, confidence, lexical_tokens, scanned_at)
+        INSERT INTO scan_logs (url, threat_status, confidence_score, lexical_tokens,scan_timestamp)
         VALUES (?, ?, ?, ?, NOW())
     `;
 
@@ -49,12 +49,12 @@ async function logScanResult(payload) {
 async function getTelemetryLogs() {
     const query = `
         SELECT 
-            DATE_FORMAT(scanned_at, '%H:%i:%s UTC') as timestamp,
-            url,
+            DATE_FORMAT(scan_timestamp, '%H:%i:%s UTC') as timestamp,
+            url AS target_url,
             threat_status as status,
-            confidence
+            confidence_score AS confidence
         FROM scan_logs
-        ORDER BY scanned_at DESC
+        ORDER BY scan_timestamp DESC
         LIMIT 50
     `;
     try {
@@ -90,6 +90,6 @@ module.exports = {
     pool,
     logScanResult,
     getTelemetryLogs,
-    verifyOperative // Export the newly created function
+    verifyOperative
 };
 
