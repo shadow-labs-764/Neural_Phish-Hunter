@@ -23,10 +23,10 @@ Built with a strict privacy-first ethos, the public interface requires no login 
 
 ## 🏗️ Architecture Overview
 This system operates on a multi-node distributed architecture:
-1. **Node 1 (API & ML Edge):** Hosts the Express API and the headless Python inference script. Routes incoming client requests, spawns the ML process, and returns the JSON autopsy.
+1. **Node 1 (API \u0026 ML Edge):** Hosts the Express API and the headless Python inference script. Routes incoming client requests, spawns the ML process, and returns the JSON autopsy.
 2. **Node 2 (The Vault):** A heavily restricted database instance stripped of its public IP. Only accepts port 3306 traffic originating from Node 1's specific `100.x.x.x` Tailscale IP.
 
-## 🚀 Development & Setup
+## 🚀 Development \u0026 Setup
 
 This repository is optimized for **GitHub Codespaces**. 
 
@@ -44,6 +44,9 @@ This repository is optimized for **GitHub Codespaces**.
    ```bash
    npm run dev
    ```
+
+## 🌐 Live Demo
+Try the deployed application here: [nexus-lab.tech](https://nexus-lab.tech)
 
 ## 🎓 Academic Context
 This project was developed as a Minor Project Submission for B.Tech CSE (Cybersecurity), focusing on secure web development, cross-process API orchestration, and zero-trust cloud deployment.
