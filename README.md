@@ -7,6 +7,10 @@ Traditional blacklist-based phishing detection fails against zero-day threats. N
 
 Built with a strict privacy-first ethos, the public interface requires no login and collects no user data—only the suspicious URLs are processed.
 
+## 🌐 Live Demo
+
+try out the neural-phish_hunter application using this demo link: **[nexus-lab.tech](https://nexus-lab.tech)**
+
 ## ✨ Key Features
 * **AI Lexical Analysis:** Utilizes a custom TF-IDF vectorizer and Logistic Regression model (Scikit-Learn) to score URLs instantly.
 * **Zero-Friction Public Interface:** A clean, "Public Trust" aesthetic for everyday users to scan URLs anonymously.
@@ -44,9 +48,6 @@ This repository is optimized for **GitHub Codespaces**.
    ```bash
    npm run dev
    ```
-
-## 🌐 Live Demo
-Try the deployed application here: [nexus-lab.tech](https://nexus-lab.tech)
 
 ## 🎓 Academic Context
 This project was developed as a Minor Project Submission for B.Tech CSE (Cybersecurity), focusing on secure web development, cross-process API orchestration, and zero-trust cloud deployment.
